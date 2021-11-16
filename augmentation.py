@@ -4,7 +4,7 @@ from albumentations import (
     GridDistortion, Downscale, ChannelShuffle, Normalize, OneOf, IAAAdditiveGaussianNoise, GaussNoise,
     RandomScale, ISONoise
 )
-
+from albumentations.pytorch import ToTensorV2
 
 def get_transform_pipeline(width, height, is_train=True):
     if(is_train):
@@ -38,11 +38,12 @@ def get_transform_pipeline(width, height, is_train=True):
             ], p=0.75),
             Downscale(scale_min=0.85, scale_max=0.95, p=0.25),
             Resize(height=height, width=width),
-            Normalize()
-
+            Normalize(),
+            ToTensorV2()
         ])
     else:
         return Compose([
             Resize(height=height, width=width),
-            Normalize()
+            Normalize(),
+            ToTensorV2()
         ])
