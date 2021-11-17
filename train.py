@@ -1,7 +1,7 @@
 import torch
 from torch.optim.lr_scheduler import StepLR
 from torch.utils import data
-from model import ClothClassifier
+from model import ClothClassifier,FashionMnistClassifier
 from dataloader import ClothDatasetSplitter,FashionMnist
 from tqdm import tqdm
 from torch.optim import Adam
@@ -13,21 +13,24 @@ from callbacks import CheckpointCallback
 from torchsummary import summary
 import os
 import wandb
+from torchvision.transforms import transforms
 # from torchsummary import summary
 # from thop import profile,clever_format
 
 
 
-EXP_NUM=8
+EXP_NUM=10
 CKPT_DIR='checkpoints'
 MODEL_NAME='cloth_classifier_resnet18_'+str(EXP_NUM)+'.pt'
-IMG_DIR='Dataset/KaggleClothing/images_compressed'
-IMG_META_DIR='Dataset/KaggleClothing/images.csv'
-IMG_WIDTH=512
-IMG_HEIGHT=512
+# IMG_DIR='Dataset/KaggleClothing/images_compressed'
+# IMG_META_DIR='Dataset/KaggleClothing/images.csv'
+TRAIN_META='Dataset/FashionMnist/fashion-mnist_train.csv'
+VALID_META='Dataset/FashionMnist/fashion-mnist_test.csv'
+IMG_WIDTH=28
+IMG_HEIGHT=28
 BATCH_SIZE=64
 SHUFFLE=True
-NUM_WORKERS=4
+NUM_WORKERS=8
 PIN_MEMORY=True
 EPOCHS=30
 LR=1e-4
@@ -36,8 +39,8 @@ device='cuda' if torch.cuda.is_available() else 'cpu'
 config={
     'experiment_number':EXP_NUM,
     'checkpoint_name':MODEL_NAME,
-    'image_dir':IMG_DIR,
-    'image_metadata':IMG_META_DIR,
+    'train_meta':TRAIN_META,
+    'valid_meta':VALID_META,
     'image_width':IMG_WIDTH,
     'image_height':IMG_HEIGHT,
     'batch_size':BATCH_SIZE,
@@ -54,13 +57,31 @@ transform_dict={
     'train':get_transform_pipeline(IMG_WIDTH,IMG_HEIGHT),
     'valid':get_transform_pipeline(IMG_WIDTH,IMG_HEIGHT,False)
 }
-dataset_splitter=ClothDatasetSplitter(img_dir=IMG_DIR,meta_csv=IMG_META_DIR,transforms_dict=transform_dict)
-train_dataset,valid_dataset=next(iter(dataset_splitter.generate_train_valid_dataset(TRAIN_SPLIT)))
+# dataset_splitter=ClothDatasetSplitter(img_dir=IMG_DIR,meta_csv=IMG_META_DIR,transforms_dict=transform_dict)
+# train_dataset,valid_dataset=next(iter(dataset_splitter.generate_train_valid_dataset(TRAIN_SPLIT)))
+train_transform=transforms.Compose([
+    transforms.Resize((IMG_WIDTH,IMG_HEIGHT)),
+    transforms.GaussianBlur(3),
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomPerspective(),
+    transforms.RandomInvert(),
+    transforms.RandomRotation(15),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+])
+valid_transform=transforms.Compose([
+    transforms.Resize((IMG_WIDTH,IMG_HEIGHT)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+])
+train_dataset=FashionMnist(TRAIN_META,train_transform)
+valid_dataset=FashionMnist(VALID_META,valid_transform)
 
 train_loader=DataLoader(dataset=train_dataset,batch_size=BATCH_SIZE,shuffle=SHUFFLE,num_workers=NUM_WORKERS,pin_memory=PIN_MEMORY)
 valid_loader=DataLoader(dataset=valid_dataset,batch_size=BATCH_SIZE,shuffle=SHUFFLE,num_workers=NUM_WORKERS,pin_memory=PIN_MEMORY)
 
-model=ClothClassifier(dataset_splitter.get_classes_num())
+# model=ClothClassifier(train_dataset.n_classes)
+model=FashionMnistClassifier(train_dataset.n_classes)
 model.to(device)
 
 print(summary(model,input_data=(3,IMG_WIDTH,IMG_HEIGHT)))

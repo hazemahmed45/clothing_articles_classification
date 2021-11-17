@@ -1,4 +1,5 @@
 # from re import split
+import albumentations
 import torch
 from torch.utils import data
 from torch.utils.data import Dataset
@@ -9,6 +10,7 @@ from sklearn.model_selection import train_test_split,KFold
 from augmentation import get_transform_pipeline
 import cv2
 import numpy as np
+from PIL import Image
 
 CATEGORY_TO_LABEL_PATH='categories_to_label.json'
 LABEL_TO_CATEGORY_PATH='label_to_categories.json'
@@ -75,26 +77,35 @@ class ClothDatasetSplitter():
     
     
 class FashionMnist(Dataset):
-    def __init__(self,images_csv) -> None:
+    def __init__(self,images_csv,transforms=None) -> None:
         super().__init__()
         self.df=pd.read_csv(images_csv)
         self.n_classes=self.df['label'].nunique()
+        self.transfroms=transforms
         return 
     def __getitem__(self, index):
         label=self.df.iloc[index,0]
         img_raveled=self.df.iloc[index,1:].to_numpy()
-        img_size=np.int(np.sqrt(img_raveled.shape[0]))
-        img=np.float32(np.reshape(img_raveled,(img_size,img_size)))
+        img_size=np.int8(np.sqrt(img_raveled.shape[0]))
+        img=np.uint8(np.reshape(img_raveled,(img_size,img_size)))
         # print(img_raveled)
-        img/=255.0
+        img=cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
+        if(self.transfroms is not None):
+            if(type(self.transfroms)==type(albumentations.Compose)):
+                img=self.transfroms(image=img)['image']
+            else:
+                img=Image.fromarray(img)
+                img=self.transfroms(img)
+        # img/=255.0
         # print(img_raveled.shape,img.shape)
-        return torch.tensor(img).float(),torch.tensor(label).long()
+        return img.float(),torch.tensor(label).long()
     def __len__(self):
         return self.df.shape[0]
 
-
-# dataset=FashionMnist('Dataset/FashionMnist/fashion-mnist_train.csv')
-# print(dataset[0])
-# img,label=dataset[0]
-# print(img.shape,label)
-# print(dataset.n_classes)
+# train_aug=get_transform_pipeline(28,28)
+# dataset=FashionMnist('Dataset/FashionMnist/fashion-mnist_train.csv',train_aug)
+# # print(dataset[0])
+# for i in range(len(dataset)):
+#     img,label=dataset[i]
+#     print(img.shape,label)
+#     # print(dataset.n_classes)

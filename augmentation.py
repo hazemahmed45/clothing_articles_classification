@@ -4,11 +4,38 @@ from albumentations import (
     GridDistortion, Downscale, ChannelShuffle, Normalize, OneOf, IAAAdditiveGaussianNoise, GaussNoise,
     RandomScale, ISONoise
 )
+from albumentations import ImageOnlyTransform
 from albumentations.pytorch import ToTensorV2
+from PIL import Image
+import numpy as np
+
+class GrayToRGB(ImageOnlyTransform):
+    def __init__(self, always_apply: bool = False, p: float = 0.5):
+        super().__init__(always_apply=always_apply, p=p)
+        
+    @property
+    def targets_as_params(self):
+        return ["image"]
+
+    def apply(self, img, **params):
+        img=Image.fromarray(img)
+        img.convert('rgb')
+        return np.array(img)
+
+    # def get_params_dependent_on_targets(self, params):
+    #     img = params["image"]
+    #     ch_arr = list(range(img.shape[2]))
+    #     random.shuffle(ch_arr)
+    #     return {"channels_shuffled": ch_arr}
+
+    def get_transform_init_args_names(self):
+        return ()
+
 
 def get_transform_pipeline(width, height, is_train=True):
     if(is_train):
         return Compose([
+            
             OneOf([
                 ShiftScaleRotate(rotate_limit=15, p=0.87),
                 Rotate(limit=15, p=0.78),
