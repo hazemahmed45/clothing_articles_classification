@@ -3,3 +3,4 @@ Dataset
 archive.zip
 fashion_mnist.zip
 checkpoints
+wandb
