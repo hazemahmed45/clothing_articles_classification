@@ -1,0 +1,184 @@
+/home/hazemahmed/anaconda3/envs/torch_env/lib/python3.7/site-packages/albumentations/augmentations/transforms.py:1802: FutureWarning: This class has been deprecated. Please use RandomBrightnessContrast
+  FutureWarning,
+/home/hazemahmed/anaconda3/envs/torch_env/lib/python3.7/site-packages/albumentations/augmentations/transforms.py:1828: FutureWarning: This class has been deprecated. Please use RandomBrightnessContrast
+  FutureWarning,
+[34m[1mwandb[39m[22m: logging graph, to disable use `wandb.watch(log_graph=False)`
+  0%|                                                                                         | 0/68 [00:00<?, ?it/s]
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+├─ResNet: 1-1                            [-1, 20]                  --
+|    └─Conv2d: 2-1                       [-1, 64, 256, 256]        9,408
+|    └─BatchNorm2d: 2-2                  [-1, 64, 256, 256]        128
+|    └─ReLU: 2-3                         [-1, 64, 256, 256]        --
+|    └─MaxPool2d: 2-4                    [-1, 64, 128, 128]        --
+|    └─Sequential: 2-5                   [-1, 64, 128, 128]        --
+|    |    └─BasicBlock: 3-1              [-1, 64, 128, 128]        73,984
+|    |    └─BasicBlock: 3-2              [-1, 64, 128, 128]        73,984
+|    └─Sequential: 2-6                   [-1, 128, 64, 64]         --
+|    |    └─BasicBlock: 3-3              [-1, 128, 64, 64]         230,144
+|    |    └─BasicBlock: 3-4              [-1, 128, 64, 64]         295,424
+|    └─Sequential: 2-7                   [-1, 256, 32, 32]         --
+|    |    └─BasicBlock: 3-5              [-1, 256, 32, 32]         919,040
+|    |    └─BasicBlock: 3-6              [-1, 256, 32, 32]         1,180,672
+|    └─Sequential: 2-8                   [-1, 512, 16, 16]         --
+|    |    └─BasicBlock: 3-7              [-1, 512, 16, 16]         3,673,088
+|    |    └─BasicBlock: 3-8              [-1, 512, 16, 16]         4,720,640
+|    └─AdaptiveAvgPool2d: 2-9            [-1, 512, 1, 1]           --
+|    └─Sequential: 2-10                  [-1, 20]                  --
+|    |    └─Linear: 3-9                  [-1, 512]                 262,656
+|    |    └─Linear: 3-10                 [-1, 512]                 262,656
+|    |    └─Linear: 3-11                 [-1, 20]                  10,260
+==========================================================================================
+Total params: 11,712,084
+Trainable params: 11,712,084
+Non-trainable params: 0
+Total mult-adds (G): 9.41
+==========================================================================================
+Input size (MB): 3.00
+Forward/backward pass size (MB): 184.01
+Params size (MB): 44.68
+Estimated Total Size (MB): 231.69
+==========================================================================================
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+├─ResNet: 1-1                            [-1, 20]                  --
+|    └─Conv2d: 2-1                       [-1, 64, 256, 256]        9,408
+|    └─BatchNorm2d: 2-2                  [-1, 64, 256, 256]        128
+|    └─ReLU: 2-3                         [-1, 64, 256, 256]        --
+|    └─MaxPool2d: 2-4                    [-1, 64, 128, 128]        --
+|    └─Sequential: 2-5                   [-1, 64, 128, 128]        --
+|    |    └─BasicBlock: 3-1              [-1, 64, 128, 128]        73,984
+|    |    └─BasicBlock: 3-2              [-1, 64, 128, 128]        73,984
+|    └─Sequential: 2-6                   [-1, 128, 64, 64]         --
+|    |    └─BasicBlock: 3-3              [-1, 128, 64, 64]         230,144
+|    |    └─BasicBlock: 3-4              [-1, 128, 64, 64]         295,424
+|    └─Sequential: 2-7                   [-1, 256, 32, 32]         --
+|    |    └─BasicBlock: 3-5              [-1, 256, 32, 32]         919,040
+|    |    └─BasicBlock: 3-6              [-1, 256, 32, 32]         1,180,672
+|    └─Sequential: 2-8                   [-1, 512, 16, 16]         --
+|    |    └─BasicBlock: 3-7              [-1, 512, 16, 16]         3,673,088
+|    |    └─BasicBlock: 3-8              [-1, 512, 16, 16]         4,720,640
+|    └─AdaptiveAvgPool2d: 2-9            [-1, 512, 1, 1]           --
+|    └─Sequential: 2-10                  [-1, 20]                  --
+|    |    └─Linear: 3-9                  [-1, 512]                 262,656
+|    |    └─Linear: 3-10                 [-1, 512]                 262,656
+|    |    └─Linear: 3-11                 [-1, 20]                  10,260
+==========================================================================================
+Total params: 11,712,084
+Trainable params: 11,712,084
+Non-trainable params: 0
+Total mult-adds (G): 9.41
+==========================================================================================
+Input size (MB): 3.00
+Forward/backward pass size (MB): 184.01
+Params size (MB): 44.68
+Estimated Total Size (MB): 231.69
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TRAIN LOOP E: 0: 100%|██████████████████████████████████████████| 68/68 [00:58<00:00,  1.17it/s, LOSS=1.86, ACC=0.48]
+
+VALID LOOP E: 0:  76%|███████████████████████████████▎         | 13/17 [00:03<00:00,  4.08it/s, LOSS=1.59, ACC=0.547]
+VALID LOOP E: 0: 100%|█████████████████████████████████████████| 17/17 [00:04<00:00,  3.98it/s, LOSS=1.58, ACC=0.552]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TRAIN LOOP E: 1: 100%|█████████████████████████████████████████| 68/68 [00:57<00:00,  1.19it/s, LOSS=1.02, ACC=0.693]
+
+
+VALID LOOP E: 1: 100%|█████████████████████████████████████████| 17/17 [00:04<00:00,  6.09it/s, LOSS=1.11, ACC=0.675]
+VALID LOOP E: 1: 100%|█████████████████████████████████████████| 17/17 [00:04<00:00,  4.02it/s, LOSS=1.11, ACC=0.675]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TRAIN LOOP E: 2:  82%|██████████████████████████████████▌       | 56/68 [00:47<00:07,  1.54it/s, LOSS=0.72, ACC=0.78]
+Dataset/images_compressed/6cd51968-dcac-492c-8466-5dbc52176bcc.jpg
+Dataset/images_compressed/c1bc116b-d8b8-4ac4-afe7-a7b94d7e0aba.jpg
+Dataset/images_compressed/c8c2307a-534a-4996-89a1-2615a7ec7534.jpg
+TRAIN LOOP E: 2:  82%|██████████████████████████████████▌       | 56/68 [00:48<00:10,  1.15it/s, LOSS=0.72, ACC=0.78]
+None
+None
+Traceback (most recent call last):
+  File "train.py", line 82, in <module>
+    for ii,(img_batch,label_batch) in iter_loop:
+  File "/home/hazemahmed/anaconda3/envs/torch_env/lib/python3.7/site-packages/tqdm/std.py", line 1180, in __iter__
+    for obj in iterable:
+  File "/home/hazemahmed/anaconda3/envs/torch_env/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 521, in __next__
+    data = self._next_data()
+  File "/home/hazemahmed/anaconda3/envs/torch_env/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 1186, in _next_data
+    idx, data = self._get_data()
+  File "/home/hazemahmed/anaconda3/envs/torch_env/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 1142, in _get_data
+    success, data = self._try_get_data()
+  File "/home/hazemahmed/anaconda3/envs/torch_env/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 990, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+  File "/home/hazemahmed/anaconda3/envs/torch_env/lib/python3.7/queue.py", line 179, in get
+    self.not_empty.wait(remaining)
+  File "/home/hazemahmed/anaconda3/envs/torch_env/lib/python3.7/threading.py", line 300, in wait
+    gotit = waiter.acquire(True, timeout)
+KeyboardInterrupt
+None
+None
