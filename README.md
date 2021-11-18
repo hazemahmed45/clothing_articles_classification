@@ -7,12 +7,12 @@ This repo is for classification and experimental tracking for two datasets. The 
 - [Fashion Mnist Dataset](https://github.com/zalandoresearch/fashion-mnist)
 # Files
 
-- Dataloader.py
-- Model.py
-- Metric.py
-- Callbacks.py
-- Augmentation.py
-- Train.py
+- [Dataloader.py](./dataloader.py)
+- [Model.py](./model.py)
+- [Metric.py](./metric.py)
+- [Callbacks.py](./callbacks.py)
+- [Augmentation.py](./augmentation.py)
+- [Train.py](./train.py)
 
 ##  Datasets
 - Clothing Dataset consists of 20 classes with overall 5000 images (so the dataset considered small to the ratio of the number of classes), also the classes have huge unbiasness (ex. Skip class have 7 images)
