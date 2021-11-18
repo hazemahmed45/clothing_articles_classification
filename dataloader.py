@@ -47,6 +47,8 @@ class ClothDatasetSplitter():
         self.data_df=pd.read_csv(meta_csv)
         self.transform_dict=transforms_dict
         self.data_df.drop(columns='sender_id',inplace=True)
+        skip_idx=self.data_df[self.data_df['label']=='skip'].index
+        self.data_df.drop(index=skip_idx,inplace=True)
         self.data_df['label']=self.data_df['label'].astype('category')
         # print(self.data_df)
         self.cat_to_label={key:i for i,key in enumerate(self.data_df['label'].cat.categories)}
@@ -102,10 +104,3 @@ class FashionMnist(Dataset):
     def __len__(self):
         return self.df.shape[0]
 
-# train_aug=get_transform_pipeline(28,28)
-# dataset=FashionMnist('Dataset/FashionMnist/fashion-mnist_train.csv',train_aug)
-# # print(dataset[0])
-# for i in range(len(dataset)):
-#     img,label=dataset[i]
-#     print(img.shape,label)
-#     # print(dataset.n_classes)
