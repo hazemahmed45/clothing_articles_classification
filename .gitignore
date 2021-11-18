@@ -4,3 +4,5 @@ archive.zip
 fashion_mnist.zip
 checkpoints
 wandb
+categories_to_label.json
+label_to_categories.json
