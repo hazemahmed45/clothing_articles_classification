@@ -34,3 +34,13 @@ class RunningLoss():
         self.value=0
         self.num=0
         return 
+    
+class Precision():
+    def __init__(self) -> None:
+        pass
+class Recall():
+    def __init__(self) -> None:
+        pass
+class F1Score():
+    def __init__(self) -> None:
+        pass

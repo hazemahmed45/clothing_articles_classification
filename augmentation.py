@@ -61,7 +61,7 @@ def get_transform_pipeline(width, height, is_train=True):
                 ], p=0.75),
             ],0.5),
 
-            Resize(height=height, width=width),
+            # Resize(height=height, width=width),
             # Downscale(scale_min=0.85, scale_max=0.95, p=0.25),
             Resize(height=height, width=width),
             Normalize(),
