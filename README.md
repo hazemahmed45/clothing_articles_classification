@@ -65,6 +65,10 @@ The **FashionMnistClassifier** is trained on the Fashion Mnist Dataset, which is
 13. Optimizer : Adam
 14. Callbacks: CheckpointCallback
 
+|       |Accuracy                                                       |Loss                                                              |
+|-------|---------------------------------------------------------------|------------------------------------------------------------------|
+|Train  |![Train_Acc](./media/train_acc_exp_tracking_kaggle_dataset.png)|![Train_Loss](./media/train_loss_exp_tracking_kaggle_dataset.png)|
+|Valid  |![Valid_Acc](./media/valid_acc_exp_tracking_kaggle_dataset.png)|![Valid_Loss](./media/valid_loss_exp_tracking_kaggle_dataset.png)|
 
 ## Fashion mnist dataset steps
 
@@ -104,10 +108,11 @@ The **FashionMnistClassifier** is trained on the Fashion Mnist Dataset, which is
 10. Optimizer : Adam
 11. Callbacks: CheckpointCallback
 
-|Accuracy                                                                                               |Loss                         |
-|-------------------------------------------------------------------------------------------------------|-----------------------------|
-|![Train_acc_Fasshion_Mnist](./media/train_acc_exp_tracking_fashion_mnist.png)                        |![Train_Loss_Fasshion_Mnist](./media/train_loss_exp_tracking_fashion_mnist.png)                             |
-|                                                                                                       |                             |
+|       |Accuracy                                                      |Loss                                                            |
+|-------|--------------------------------------------------------------|----------------------------------------------------------------|
+|Train  |![Train_Acc](./media/train_acc_exp_tracking_fashion_mnist.png)|![Train_Loss](./media/train_loss_exp_tracking_fashion_mnist.png)|
+|Valid  |![Valid_Acc](./media/valid_acc_exp_tracking_fashion_mnist.png)|![Valid_Loss](./media/valid_loss_exp_tracking_fashion_mnist.png)|
+
 ## Save a file
 
 You can save any file of the workspace to **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Save on**. Even if a file in the workspace is already synced, you can save it to another location. StackEdit can sync one file with multiple locations and accounts.
