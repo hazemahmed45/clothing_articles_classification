@@ -39,6 +39,11 @@ class ClothDataset(Dataset):
         return img.float(),torch.tensor(label,dtype=torch.int64)
     def __len__(self):
         return self.dataframe.shape[0]
+    def get_classes_count(self):
+        counts=np.zeros(len(self.cat_to_label.keys()))
+        for key,count in dict(self.dataframe['label'].value_counts()).items():
+            counts[self.cat_to_label[key]]=count
+        return counts
     
     
 class ClothDatasetSplitter():
@@ -47,7 +52,7 @@ class ClothDatasetSplitter():
         self.data_df=pd.read_csv(meta_csv)
         self.transform_dict=transforms_dict
         self.data_df.drop(columns='sender_id',inplace=True)
-        skip_idx=self.data_df[self.data_df['label']=='skip'].index
+        skip_idx=self.data_df[self.data_df['label']=='Skip'].index
         self.data_df.drop(index=skip_idx,inplace=True)
         self.data_df['label']=self.data_df['label'].astype('category')
         # print(self.data_df)
@@ -104,3 +109,9 @@ class FashionMnist(Dataset):
     def __len__(self):
         return self.df.shape[0]
 
+
+
+# splitter=ClothDatasetSplitter('Dataset/KaggleClothing/images_compressed','Dataset/KaggleClothing/images.csv',dict())
+# dataset,_=next(iter(splitter.generate_train_valid_dataset()))
+# print(dataset.get_classes_count()/dataset.get_classes_count().sum())
+# print(1-(dataset.get_classes_count()/dataset.get_classes_count().sum()))
