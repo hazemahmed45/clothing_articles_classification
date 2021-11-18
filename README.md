@@ -113,19 +113,16 @@ The **FashionMnistClassifier** is trained on the Fashion Mnist Dataset, which is
 |Train  |![Train_Acc](./media/train_acc_exp_tracking_fashion_mnist.png)|![Train_Loss](./media/train_loss_exp_tracking_fashion_mnist.png)|
 |Valid  |![Valid_Acc](./media/valid_acc_exp_tracking_fashion_mnist.png)|![Valid_Loss](./media/valid_loss_exp_tracking_fashion_mnist.png)|
 
-## Save a file
-
-You can save any file of the workspace to **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Save on**. Even if a file in the workspace is already synced, you can save it to another location. StackEdit can sync one file with multiple locations and accounts.
 
 
-## SmartyPants
+## Benchmark
 
 SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:
 
-|                |ASCII                          |HTML                         |
-|----------------|-------------------------------|-----------------------------|
-|Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |
-|Quotes          |`"Isn't this fun?"`            |"Isn't this fun?"            |
-|Dashes          |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
+|                     |Params    |Flops  |Macs |
+|                     | (M)      | (G)   |(G)  |
+|---------------------|-------------------------
+|ClothClassifier      |11.7      |3.6    |1.8  |
+|FashionMnistClassifer|0.14      |0.044  |0.022|
 
 
