@@ -65,10 +65,13 @@ The **FashionMnistClassifier** is trained on the Fashion Mnist Dataset, which is
 13. Optimizer : Adam
 14. Callbacks: CheckpointCallback
 
-|       |Accuracy                                                       |Loss                                                              |
-|-------|---------------------------------------------------------------|------------------------------------------------------------------|
-|Train  |![Train_Acc](./media/train_acc_exp_tracking_kaggle_dataset.png)|![Train_Loss](./media/train_loss_exp_tracking_kaggle_dataset.png)|
-|Valid  |![Valid_Acc](./media/valid_acc_exp_tracking_kaggle_dataset.png)|![Valid_Loss](./media/valid_loss_exp_tracking_kaggle_dataset.png)|
+|         |Train                                       |Valid                                       |
+|---------|--------------------------------------------|--------------------------------------------|
+|Loss     |![Train_Loss](./media/train_loss_cd.png)    |![Valid_Loss](./media/valid_loss_cd.png)    | 
+|Accuracy |![Train_Acc](./media/train_acc_cd.png)      |![Valid_Acc](./media/valid_acc_cd.png)      |
+|Precision|![Train_prec](./media/train_prec_cd.png)    |![Valid_prec](./media/valid_prec_cd.png)    | 
+|Recall   |![Train_recall](./media/train_recall_cd.png)|![Valid_recall](./media/valid_recall_cd.png)|
+|F1Score  |![Train_f1](./media/train_f1_cd.png)        |![Valid_f1](./media/valid_f1_cd.png)        |
 
 ## Fashion mnist dataset steps
 
@@ -108,10 +111,13 @@ The **FashionMnistClassifier** is trained on the Fashion Mnist Dataset, which is
 10. Optimizer : Adam
 11. Callbacks: CheckpointCallback
 
-|       |Accuracy                                                      |Loss                                                            |
-|-------|--------------------------------------------------------------|----------------------------------------------------------------|
-|Train  |![Train_Acc](./media/train_acc_exp_tracking_fashion_mnist.png)|![Train_Loss](./media/train_loss_exp_tracking_fashion_mnist.png)|
-|Valid  |![Valid_Acc](./media/valid_acc_exp_tracking_fashion_mnist.png)|![Valid_Loss](./media/valid_loss_exp_tracking_fashion_mnist.png)|
+|         |Train                                       |Valid                                       |
+|---------|--------------------------------------------|--------------------------------------------|
+|Loss     |![Train_Loss](./media/train_loss_fm.png)    |![Valid_Loss](./media/valid_loss_fm.png)    | 
+|Accuracy |![Train_Acc](./media/train_acc_fm.png)      |![Valid_Acc](./media/valid_acc_fm.png)      |
+|Precision|![Train_prec](./media/train_prec_fm.png)    |![Valid_prec](./media/valid_prec_fm.png)    | 
+|Recall   |![Train_recall](./media/train_recall_fm.png)|![Valid_recall](./media/valid_recall_fm.png)|
+|F1Score  |![Train_f1](./media/train_f1_fm.png)        |![Valid_f1](./media/valid_f1_fm.png)        |
 
 
 
