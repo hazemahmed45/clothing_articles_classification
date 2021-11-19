@@ -103,6 +103,9 @@ class FashionMnist(Dataset):
             else:
                 img=Image.fromarray(img)
                 img=self.transfroms(img)
+        else:
+            img=Image.fromarray(img)
+            return img,label
         # img/=255.0
         # print(img_raveled.shape,img.shape)
         return img.float(),torch.tensor(label).long()

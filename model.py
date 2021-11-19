@@ -1,3 +1,4 @@
+from pandas.core.algorithms import mode
 from torchvision.models import resnet18
 import torch
 from torch import nn
@@ -17,10 +18,24 @@ class ClothClassifier(nn.Module):
             nn.Dropout(0.5),
             nn.Linear(512,num_classes)
         )
-
+        self.feature_maps=[]
+        for module in self.backbone.modules():
+            module.register_forward_hook(self.hook_fn_forward)
     def forward(self,x):
+
         out = self.backbone(x)
+        self.feature_maps=self.feature_maps[:10]
         return out
+    def hook_fn_forward(self,module,input,output):
+        if(isinstance(module,nn.Conv2d)):
+            self.feature_maps.append(output)
+            return
+
+
+
+
+
+
 def conv_block(in_filters,out_filters,padding=1,stride=1,kernel=3,dropout_rate=0.2,with_batch_norm=True,name='conv_block'):
     block=nn.Sequential()
     block.add_module(name=name+'_conv',module=nn.Conv2d(in_filters,out_filters,kernel,stride,padding))
@@ -52,17 +67,24 @@ class FashionMnistClassifier(nn.Module):
         )
         return 
     def forward(self,x):
+        self.feature_maps=[]
         # print(x.shape)
         x=self.conv_1(x)
+        self.feature_maps.append(x)
         x=self.conv_2(x)
+        self.feature_maps.append(x)
         x=self.pooling(x)
         # print(x.shape)
         x=self.conv_3(x)
+        self.feature_maps.append(x)
         x=self.conv_4(x)
+        self.feature_maps.append(x)
         x=self.pooling(x)
         # print(x.shape)
         x=self.conv_5(x)
+        self.feature_maps.append(x)
         x=self.conv_6(x)
+        self.feature_maps.append(x)
         # print(x.shape)
         x=self.classifier(x)
         return x
