@@ -123,7 +123,6 @@ The **FashionMnistClassifier** is trained on the Fashion Mnist Dataset, which is
 
 ## Benchmark
 
-SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:
 
 |                     |Params(M) |Flops(G)|Macs(G) |
 |---------------------|----------|--------|--------|
