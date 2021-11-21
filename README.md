@@ -130,3 +130,9 @@ The **FashionMnistClassifier** is trained on the Fashion Mnist Dataset, which is
 |FashionMnistClassifer|0.14      |0.044   |0.022   |
 
 
+## Reciptive Field
+
+|                     |RF |
+|---------------------|---|
+|ClothClassifier      |222|
+|FashionMnistClassifer|28 |
